@@ -40,11 +40,11 @@ class FollowSerializer(serializers.ModelSerializer):
             )
         ]
 
-    def validate(self, data):
+    def validate(self, attrs):
 
-        if self.context['request'].user == data['following']:
-            raise serializers.ValidationError('СЕБЯ ФОЛЛОВИТЬ НЕЛЬЗЯ!!!111!1')
-        return data
+        if self.context['request'].user == attrs['following']:
+            raise serializers.ValidationError('Нельзя подписываться на себя')
+        return attrs
 
 
 class GroupSerializer(serializers.ModelSerializer):
